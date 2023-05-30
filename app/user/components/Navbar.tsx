@@ -1,8 +1,14 @@
 "use client";
 
 import { signOut } from "next-auth/react";
+import { User } from "@prisma/client";
 
-const Navbar: React.FC<UserProps> = ({ currentUser }) => {
+interface NavbarProps {
+  currentUser: User | null;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
+  console.log(currentUser);
   return (
     <div>
       <div>Navbar</div>

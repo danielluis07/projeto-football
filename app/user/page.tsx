@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import getCurrentUser from "../actions/getCurrentUser";
+import Countries from "./components/Countries";
 
 const Home = async () => {
   const currentUser = await getCurrentUser();
@@ -9,6 +10,7 @@ const Home = async () => {
     <div>
       <div>hello</div>
       <Navbar currentUser={currentUser} />
+      <Countries currentUser={currentUser} />
     </div>
   );
 };
