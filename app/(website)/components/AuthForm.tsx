@@ -12,6 +12,7 @@ import { signIn, useSession } from "next-auth/react";
 type Variant = "LOGIN" | "REGISTER";
 
 const AuthForm = () => {
+  const session = useSession();
   const router = useRouter();
   const [variant, setVariant] = useState<Variant>("LOGIN");
   const [isLoading, setIsLoading] = useState(false);
@@ -26,6 +27,12 @@ const AuthForm = () => {
       apikey: "",
     },
   });
+
+  useEffect(() => {
+    if (session?.status === "authenticated") {
+      router.push("/user");
+    }
+  }, [session?.status, router]);
 
   const toggleVariant = useCallback(() => {
     if (variant === "LOGIN") {
@@ -108,7 +115,7 @@ const AuthForm = () => {
           />
           <div>
             <Button disabled={isLoading} fullWidth type="submit">
-              {variant === "LOGIN" ? "Sign in" : "Register"}
+              {variant === "LOGIN" ? "Entrar" : "Registrar"}
             </Button>
           </div>
         </form>
