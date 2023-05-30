@@ -29,6 +29,9 @@ const Home = async ({ params: { year, team, season } }: PlayersParams) => {
           <div className="mt-20 pb-20 w-full text-center text-xl text-slate-300">
             Estatísticas do time:
           </div>
+          <div className="w-full text-center py-10 text-slate-300">
+            Gols por minuto de jogo
+          </div>
           <TeamStatistics
             currentUser={currentUser}
             year={year}

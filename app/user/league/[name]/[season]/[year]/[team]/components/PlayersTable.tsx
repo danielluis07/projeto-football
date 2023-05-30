@@ -161,7 +161,7 @@ const PlayersTable: React.FC<PlayersTableProps> = ({
         </div>
       ))}
       <br />
-      <div className="flex flex-row gap-x-8 justify-center items-center">
+      <div className="flex w-4/5 mx-auto flex-row gap-x-8 items-center">
         <button
           className="p-4 rounded-md bg-slate-500 text-slate-300"
           onClick={() => setPage(1)}>

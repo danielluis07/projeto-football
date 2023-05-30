@@ -38,7 +38,6 @@ const GoalsChart: React.FC<GoalsChartProps> = ({ stat }: any) => {
           <Bar dataKey="percentage" fill="#82ca9d" />
         </BarChart>
       </ResponsiveContainer>
-      <div>hello again</div>
     </div>
   );
 };
