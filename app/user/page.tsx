@@ -8,7 +8,6 @@ const Home = async () => {
   console.log(currentUser);
   return (
     <div>
-      <div>hello</div>
       <Navbar currentUser={currentUser} />
       <Countries currentUser={currentUser} />
     </div>
