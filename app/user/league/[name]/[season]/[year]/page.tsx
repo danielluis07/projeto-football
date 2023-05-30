@@ -69,7 +69,8 @@ const Home = async ({ params: { season, year } }: TeamsParams) => {
                   width={200}
                   height={200}
                 />
-                <Link href={``}>
+                <Link
+                  href={`/user/league/${stat.team.country}/${season}/${year}/${stat.team.id}`}>
                   <div className="text-center py-2 cursor-pointer hover:text-blue-500">
                     {stat.team.name}
                   </div>
