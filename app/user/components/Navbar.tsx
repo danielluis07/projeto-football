@@ -1,9 +1,8 @@
 "use client";
 
 import { signOut } from "next-auth/react";
-import React from "react";
 
-const Navbar = () => {
+const Navbar: React.FC<UserProps> = ({ currentUser }) => {
   return (
     <div>
       <div>Navbar</div>
