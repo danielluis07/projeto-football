@@ -7,10 +7,12 @@ import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
+import { signIn, useSession } from "next-auth/react";
 
 type Variant = "LOGIN" | "REGISTER";
 
 const AuthForm = () => {
+  const router = useRouter();
   const [variant, setVariant] = useState<Variant>("LOGIN");
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -37,10 +39,29 @@ const AuthForm = () => {
     setIsLoading(true);
 
     if (variant === "REGISTER") {
-      axios.post("api/register", data);
+      axios
+        .post("api/register", data)
+        .then(() => signIn("credentials", data))
+        .catch(() => toast.error("Algo deu errado!"))
+        .finally(() => setIsLoading(false));
     }
 
     if (variant === "LOGIN") {
+      signIn("credentials", {
+        ...data,
+        redirect: false,
+      })
+        .then((callback) => {
+          if (callback?.error) {
+            toast.error("Chave inválida");
+          }
+
+          if (callback?.ok && !callback?.error) {
+            toast.success("Entrou!");
+            router.push("/user");
+          }
+        })
+        .finally(() => setIsLoading(false));
     }
   };
   return (
@@ -63,7 +84,7 @@ const AuthForm = () => {
                 errors={errors}
                 required
                 id="name"
-                label="Nome"
+                label="Name"
               />
               <Input
                 disabled={isLoading}
@@ -87,7 +108,7 @@ const AuthForm = () => {
           />
           <div>
             <Button disabled={isLoading} fullWidth type="submit">
-              {variant === "LOGIN" ? "Entrar" : "Registrar"}
+              {variant === "LOGIN" ? "Sign in" : "Register"}
             </Button>
           </div>
         </form>
