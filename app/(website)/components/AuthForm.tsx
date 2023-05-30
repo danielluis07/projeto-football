@@ -35,6 +35,13 @@ const AuthForm = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
+
+    if (variant === "REGISTER") {
+      axios.post("api/register", data);
+    }
+
+    if (variant === "LOGIN") {
+    }
   };
   return (
     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
