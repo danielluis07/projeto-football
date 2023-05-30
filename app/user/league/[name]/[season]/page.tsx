@@ -1,5 +1,6 @@
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import Container from "@/app/components/Container";
+import Navbar from "@/app/user/components/Navbar";
 import Link from "next/link";
 
 interface SeasonParams {
@@ -62,23 +63,32 @@ const Home = async ({ params: { season } }: SeasonParams) => {
   console.log(data);
 
   return (
-    <div>
-      <div>
-        {data.response.map((seasons) => (
-          <div key={seasons.league.id}>
-            <div>
+    <>
+      <Navbar currentUser={currentUser} />
+      <div className="bg-[url('../public/images/field.jpg')] w-full min-h-full">
+        <Container>
+          <div className="w-full text-center p-8 text-slate-300">
+            Selecione uma Temporada
+          </div>
+          {data.response.map((seasons) => (
+            <div
+              className="mt-20 pb-20 flex flex-col gap-y-8"
+              key={seasons.league.id}>
               {seasons.seasons.map((year) => (
-                <div key={year.year}>
-                  <Link href={``}>
-                    <div>{year.year}</div>
+                <div
+                  className="w-full text-xl text-center rounded-md bg-slate-700 text-slate-300 hover:bg-slate-400 hover:text-slate-500"
+                  key={year.year}>
+                  <Link
+                    href={`/user/league/${seasons.country.name}/${seasons.league.id}/${year.year}`}>
+                    <div className="py-4">{year.year}</div>
                   </Link>
                 </div>
               ))}
             </div>
-          </div>
-        ))}
+          ))}
+        </Container>
       </div>
-    </div>
+    </>
   );
 };
 
